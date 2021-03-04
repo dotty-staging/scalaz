@@ -24,8 +24,6 @@ import sbtdynver.DynVerPlugin.autoImport._
 
 import xerial.sbt.Sonatype.autoImport._
 
-import dotty.tools.sbtplugin.DottyPlugin.autoImport.{isDotty, dottyLatestNightlyBuild}
-
 object build {
   type Sett = Def.Setting[_]
 
@@ -121,7 +119,7 @@ object build {
       (f, path)
     },
     commands += Command.command("SetDottyNightlyVersion") {
-      s"""++ ${dottyLatestNightlyBuild.get}!""" :: _
+      s"""++ ${DottyBuild.latestNightlyVersion.get}!""" :: _
     },
     scalaVersion := Scala213,
     crossScalaVersions := Seq(Scala213),
@@ -187,7 +185,7 @@ object build {
       val tag = tagOrHash.value
       val base = (baseDirectory in LocalRootProject).value.getAbsolutePath
       val options = (scalacOptions in (Compile, doc)).value
-      if (isDotty.value) {
+      if (scalaVersion.value.startsWith("3")) {
         Nil
       } else {
         options ++ Seq("-sourcepath", base, "-doc-source-url", "https://github.com/scalaz/scalaz/tree/" + tag + "€{FILE_PATH}.scala")
@@ -195,7 +193,7 @@ object build {
     },
     sources in (Compile, doc) := {
       val src = (sources in (Compile, doc)).value
-      if (isDotty.value) {
+      if (scalaVersion.value.startsWith("3")) {
         Nil
       } else {
         src

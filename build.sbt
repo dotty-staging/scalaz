@@ -97,7 +97,7 @@ lazy val scalacheckBinding =
     .settings(
       name := "scalaz-scalacheck-binding",
       scalacOptions in (Compile, compile) -= "-Ywarn-value-discard",
-      libraryDependencies += ("org.scalacheck" %%% "scalacheck" % scalaCheckVersion.value).withDottyCompat(scalaVersion.value),
+      libraryDependencies += ("org.scalacheck" %%% "scalacheck" % scalaCheckVersion.value).cross(CrossVersion.for3Use2_13),
       osgiExport("scalaz.scalacheck")
     )
     .dependsOn(core, iteratee)
@@ -120,7 +120,7 @@ lazy val tests = crossProject(JSPlatform, JVMPlatform).crossType(ScalazCrossType
       )
       Tests.Argument(TestFrameworks.ScalaCheck, scalacheckOptions: _*)
     },
-    libraryDependencies += ("org.scalacheck" %%% "scalacheck" % scalaCheckVersion.value % "test").withDottyCompat(scalaVersion.value)
+    libraryDependencies += ("org.scalacheck" %%% "scalacheck" % scalaCheckVersion.value % "test").cross(CrossVersion.for3Use2_13)
   )
   .jvmSettings(
     minSuccessfulTests := 33,
@@ -131,7 +131,7 @@ lazy val tests = crossProject(JSPlatform, JVMPlatform).crossType(ScalazCrossType
         "UnapplyTest.scala",
       )
       val list = (Test / sources).value
-      if (isDotty.value) {
+      if (scalaVersion.value.startsWith("3")) {
         list.filterNot { src =>
           exclude.contains(src.getName)
         }
