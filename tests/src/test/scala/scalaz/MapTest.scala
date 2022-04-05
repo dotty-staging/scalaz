@@ -339,7 +339,7 @@ object MapTest extends SpecLite {
         case Tip() =>
           a.splitRoot must_=== IList.empty[Int ==>> Int]
         case Bin(k, x, l, r) =>
-          val ICons(l2, ICons(kv, ICons(r2, INil()))) = a.splitRoot
+          val ICons(l2, ICons(kv, ICons(r2, INil()))) = a.splitRoot: @unchecked
           structurallySound(l2)
           structurallySound(r2)
           l2 must_=== l

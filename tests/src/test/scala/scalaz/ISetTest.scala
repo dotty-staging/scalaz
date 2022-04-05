@@ -114,7 +114,7 @@ object ISetTest extends SpecLite {
       case Tip() =>
         a.splitRoot must_=== IList.empty[ISet[Int]]
       case s@Bin(_, _, _) =>
-        val ICons(l, ICons(x, ICons(r, INil()))) = s.splitRoot
+        val ICons(l, ICons(x, ICons(r, INil()))) = s.splitRoot: @unchecked
         structurallySound(l)
         structurallySound(r)
         l must_=== s.l

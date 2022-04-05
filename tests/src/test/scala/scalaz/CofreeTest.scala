@@ -136,7 +136,7 @@ object CofreeTest extends SpecLite {
 
     import syntax.foldable._
     val f = (_: Int) + (_: Int)
-    val (h ##:: t) : EphemeralStream[Int] = Tag.unwrap(Applicative[λ[α => EphemeralStream[α] @@ Tags.Zip]].apply2(Tags.Zip[EStream[Int]](a.toEphemeralStream), Tags.Zip[EStream[Int]](b.toEphemeralStream))(f))
+    val (h ##:: t) : EphemeralStream[Int] = Tag.unwrap(Applicative[λ[α => EphemeralStream[α] @@ Tags.Zip]].apply2(Tags.Zip[EStream[Int]](a.toEphemeralStream), Tags.Zip[EStream[Int]](b.toEphemeralStream))(f)): @unchecked
 
     val aa = Tags.Zip(oneAndStreamCofreeLazyOptionIso.to(a))
     val bb = Tags.Zip(oneAndStreamCofreeLazyOptionIso.to(b))

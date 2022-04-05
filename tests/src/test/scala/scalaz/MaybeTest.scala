@@ -108,7 +108,7 @@ object MaybeTest extends SpecLite {
     def unapply(u: Unfoo): Maybe.Just[(String, Int)] = Maybe.Just((u.s, u.i))
   }
   "Just can be used in custom unapply" ! {
-    val Unfoo(_, _) = Unfoo("hello", 1)
+    val Unfoo(_, _) = Unfoo("hello", 1): @unchecked
   }
 
   "attempt" in {

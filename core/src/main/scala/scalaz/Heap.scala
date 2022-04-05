@@ -331,7 +331,7 @@ object Heap extends HeapInstances {
     def heapify[A](leq: (A, A) => Boolean): Tree[Ranked[A]] => Tree[Ranked[A]] = {
       case n@Node(_, ts) if ts.isEmpty      => n
       case n@Node(Ranked(r, a), as) => {
-        val (left, Node(Ranked(rp, ap), asp) ##:: right) = minZ(leq)(as)
+        val (left, Node(Ranked(rp, ap), asp) ##:: right) = minZ(leq)(as): @unchecked
         if (leq(a, ap)) n
         else
           Node(Ranked(r, ap), rezip((left, heapify(leq)(Node(Ranked(rp, a), asp)) ##:: right)))

@@ -91,7 +91,7 @@ object LaunchburyInterpreter extends App {
   private def freshen(e: Expr): State[ReduceState, Expr] = {
     val getFreshVar : State[ReduceState, String] = for {
                             s <- get
-                            ReduceState(_, f #:: fs) = s
+                            ReduceState(_, f #:: fs) = s: @unchecked
                             _ <- modify(s => s.copy(freshVars = fs))
                           } yield f
     // Lambda and Let define new bound variables, so we substitute fresh variables into them
