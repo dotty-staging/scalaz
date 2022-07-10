@@ -10,7 +10,7 @@ object TagTest extends SpecLite {
   "k.@@" should {
     "be abstract" in {
       val r = (List[Int](42) ++ List[Int @@ Mult]()).toSet
-      r: Set[Any]
+      r: Set[Int | Int @@ scalaz.Tags.Multiplication]
       true
     }
   }
