@@ -167,7 +167,7 @@ object build {
       "-unchecked"
     ),
     scalacOptions ++= {
-      val common = "implicitConversions,higherKinds,existentials"
+      val common = "implicitConversions"
       CrossVersion.partialVersion(scalaVersion.value) match {
         case Some((0 | 3, _)) =>
           Seq(
