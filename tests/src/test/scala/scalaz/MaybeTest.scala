@@ -96,7 +96,7 @@ object MaybeTest extends SpecLite {
   "just orElse is just" ! forAll { (x: Int, m: Maybe[Int]) => just(x).orElse(m).isJust }
 
   "fromNullable(null) is Empty" ! check {
-    val s: String = null
+    val s: String | Null = null
     Maybe.fromNullable(s).isEmpty
   }
 

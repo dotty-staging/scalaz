@@ -127,12 +127,12 @@ object EitherTTest extends SpecLite {
 
       case class ABC(s:String)
 
-      implicit val m = new Monoid[(ABC, Int)] {
-        def zero: (ABC, Int) = (null, -1)
-        def append(f1: (ABC, Int), f2: => (ABC, Int)): (ABC, Int) = f1
+      implicit val m = new Monoid[(ABC | Null, Int)] {
+        def zero: (ABC | Null, Int) = (null, -1)
+        def append(f1: (ABC | Null, Int), f2: => (ABC | Null, Int)): (ABC | Null, Int) = f1
       }
 
-      def brokenMethod: EitherT[(ABC, Int), Option, (ABC, String)] =
+      def brokenMethod: EitherT[(ABC | Null, Int), Option, (ABC | Null, String)] =
         EitherT(Some((ABC("abcData"),"Success").right))
 
       def filterComp =

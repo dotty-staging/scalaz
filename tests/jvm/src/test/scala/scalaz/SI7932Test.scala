@@ -13,7 +13,7 @@ object SI7932Test extends SpecLite {
 
   trait M[F] {
     type X[a, b] = F
-    def category: Category[X] = null
+    def category: Category[X] | Null = null
   }
 
   abstract class C extends M[Float]

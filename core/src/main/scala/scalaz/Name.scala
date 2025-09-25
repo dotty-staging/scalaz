@@ -11,7 +11,7 @@ sealed abstract class Name[A] {
 final class Need[A] private(private[this] var eval: () => A) extends Name[A] {
   lazy val value: A = {
     val value0 = eval()
-    eval = null
+    eval = null.asInstanceOf[() => A]
     value0
   }
 }

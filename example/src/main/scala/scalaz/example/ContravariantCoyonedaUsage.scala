@@ -60,7 +60,7 @@ object ContravariantCoyonedaUsage extends App {
   def parseDate(s: String): (Int, Option[(Int, Int)]) \/ String =
     (for {
        grps <- """([0-9]+)-([0-9]+)-([0-9]+)""".r findFirstMatchIn s
-       List(y, m, d) <- grps.subgroups.traverse(_.parseInt.toOption)
+       List(y, m, d) <- grps.subgroups.traverse(_.nn.parseInt.toOption)
      } yield (y, Some((m, d))))
       .orElse(for {
                 n <- """[0-9]+""".r findFirstIn s
