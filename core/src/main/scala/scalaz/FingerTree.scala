@@ -1104,7 +1104,7 @@ sealed abstract class IndSeqInstances {
   implicit def indSeqEqual[A: Equal]: Equal[IndSeq[A]] =
     Equal.equalBy(_.self)
 
-  implicit val indSeqInstance: MonadPlus[IndSeq] with Alt[IndSeq] with Traverse[IndSeq] with IsEmpty[IndSeq] =
+  implicit val indSeqInstance: MonadPlus[IndSeq] & Alt[IndSeq] & Traverse[IndSeq] & IsEmpty[IndSeq] =
     new MonadPlus[IndSeq] with Alt[IndSeq] with Traverse[IndSeq] with IsEmpty[IndSeq] with IsomorphismFoldable[IndSeq, FingerTree[Int, *]]{
       def G = implicitly
       override val naturalTrans = new (IndSeq ~> FingerTree[Int, *]) {
